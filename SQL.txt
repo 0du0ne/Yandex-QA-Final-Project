@@ -1,0 +1,34 @@
+Задание 1
+
+SELECT login,
+COUNT("Orders".id)
+FROM "Couriers"
+JOIN "Orders" ON "Couriers".id="Orders"."courierId"
+WHERE "inDelivery"=true
+GROUP BY login;
+
+Задание 2
+
+select track,
+CASE
+WHEN "inDelivery"=true AND finished=false THEN 1
+WHEN "inDelivery"=true AND finished=true THEN 2
+WHEN cancelled=true THEN -1
+ELSE 0
+END AS status
+from "Orders";
+
+Ответ:
+
+ track  | status
+--------+--------
+ 360991 |      2
+ 360991 |      2
+ 406669 |      0
+ 181638 |      0
+ 893615 |      0
+ 341987 |      1
+ 341987 |      1
+ 573761 |      1
+ 573761 |      1
+(9 rows)
